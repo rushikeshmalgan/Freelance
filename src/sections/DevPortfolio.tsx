@@ -45,7 +45,7 @@ const devProjects: DevProject[] = [
     id: 2,
     title: "AI Resume Builder",
     description: "Build Smarter. Get Hired Faster.",
-    thumbnail: "/dev-thumb-2.jpg",
+    thumbnail: "/resume.png",
     tags: ["Next.js", "MongoDB", "Stripe", "Tailwind"],
     category: "Full Stack",
     demoUrl: "https://demo.com",
