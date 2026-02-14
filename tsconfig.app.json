@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.json", 
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.bin/tsconfig.app.tsbuildinfo",
@@ -17,7 +18,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* PATH ALIASING - ADD THESE TWO LINES */
+    /* PATH ALIASING */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
