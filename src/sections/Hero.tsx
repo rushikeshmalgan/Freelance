@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Play, Code2, Film } from 'lucide-react';
+import { ArrowDown, Play, Code2, Film, X } from 'lucide-react';
 
 interface HeroProps {
   mode: 'creative' | 'tech';
@@ -72,7 +72,6 @@ export function Hero({ mode, setMode }: HeroProps) {
             }`}
           >
             <div className="relative w-36 h-36 sm:w-44 sm:h-44">
-
               {/* Rotating Gradient Ring */}
               <div
                 className={`absolute inset-0 rounded-full blur-sm opacity-80 ${
@@ -90,7 +89,7 @@ export function Hero({ mode, setMode }: HeroProps) {
                 className="relative w-full h-full rounded-full overflow-hidden border border-white/10 shadow-xl group cursor-pointer"
               >
                 <img
-                  src="/rushikesh.jpeg"
+                  src="/pfp.png"
                   alt="Rushikesh Malgan"
                   className="w-full h-full object-cover object-center scale-[1.05] group-hover:scale-[1.1] transition-transform duration-500"
                 />
@@ -128,14 +127,17 @@ export function Hero({ mode, setMode }: HeroProps) {
             Creative Technologist
           </p>
 
-          {/* Mode Switcher */}
+          {/* Mode Switcher - Redirects and color changes on click */}
           <div
             className={`flex items-center gap-2 p-1.5 rounded-full glass-card mb-10 transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <button
-              onClick={() => setMode('creative')}
+              onClick={() => {
+                setMode('creative');
+                setTimeout(() => scrollToSection('#video'), 150);
+              }}
               className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                 mode === 'creative'
                   ? 'bg-[hsl(340,100%,50%)] text-white glow-creative'
@@ -147,7 +149,10 @@ export function Hero({ mode, setMode }: HeroProps) {
             </button>
 
             <button
-              onClick={() => setMode('tech')}
+              onClick={() => {
+                setMode('tech');
+                setTimeout(() => scrollToSection('#dev'), 150);
+              }}
               className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                 mode === 'tech'
                   ? 'bg-[hsl(187,100%,50%)] text-black glow-tech'
@@ -206,17 +211,25 @@ export function Hero({ mode, setMode }: HeroProps) {
       {/* Zoom Modal */}
       {isZoomed && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md transition-all p-4"
           onClick={() => setIsZoomed(false)}
         >
+          {/* Modal Close Button */}
+          <button 
+            className="absolute top-8 left-8 text-white/50 hover:text-white transition-colors"
+            onClick={() => setIsZoomed(false)}
+          >
+            <X size={32} />
+          </button>
+
           <div
-            className="relative max-w-3xl w-[90%] animate-scaleIn"
+            className="relative max-w-2xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src="/rushikesh.jpeg"
+              src="/pfp.png"
               alt="Rushikesh Malgan"
-              className="w-full h-auto rounded-2xl shadow-2xl object-contain"
+              className="w-full h-auto rounded-2xl shadow-2xl object-contain border border-white/10"
             />
           </div>
         </div>
