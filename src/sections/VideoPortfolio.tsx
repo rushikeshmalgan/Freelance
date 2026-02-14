@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Play, ExternalLink, Clock, Calendar, X } from "lucide-react";
-
+import { Play, Clock, Calendar, X } from "lucide-react";
 interface VideoPortfolioProps {
   mode: "creative" | "tech";
 }

@@ -3,11 +3,11 @@ import {
   ExternalLink,
   Github,
   Layers,
-  Server,
+  // Server,
   Brain,
   Layout,
   X,
-  Code2,
+  // Code2,
   Hammer, // Added for Work in Progress icon
 } from "lucide-react";
 
