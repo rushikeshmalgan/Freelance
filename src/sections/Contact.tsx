@@ -110,7 +110,7 @@ export function Contact({ mode }: ContactProps) {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* FORM */}
+          {/* FORM - UPDATED CSS HERE */}
           <div
             className={`transition-all duration-1000 delay-200 ${
               isVisible
@@ -118,66 +118,77 @@ export function Contact({ mode }: ContactProps) {
                 : "opacity-0 -translate-x-10"
             }`}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {["name", "email"].map((field) => (
-                <input
-                  key={field}
-                  type={field === "email" ? "email" : "text"}
-                  name={field}
-                  value={(formData as any)[field]}
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 bg-white/5 p-6 md:p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {["name", "email"].map((field) => (
+                  <div key={field} className="relative group">
+                    <input
+                      type={field === "email" ? "email" : "text"}
+                      name={field}
+                      value={(formData as any)[field]}
+                      onChange={handleChange}
+                      required
+                      placeholder={field === "name" ? "Full Name" : "Email Address"}
+                      className="w-full px-5 py-4 bg-black/20 border border-white/10 rounded-xl focus:outline-none transition-all duration-300 placeholder:text-gray-500 text-white"
+                      onFocus={(e) => {
+                        e.target.style.borderColor = accentColor;
+                        e.target.parentElement!.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = `0 10px 30px -10px ${accentColor}40`;
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "rgba(255,255,255,0.1)";
+                        e.target.parentElement!.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = "none";
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="relative group">
+                <textarea
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
                   required
-                  placeholder={field === "name" ? "Your Name" : "Your Email"}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg focus:outline-none transition-all duration-300"
+                  rows={5}
+                  placeholder="Tell me about your project..."
+                  className="w-full px-5 py-4 bg-black/20 border border-white/10 rounded-xl resize-none focus:outline-none transition-all duration-300 placeholder:text-gray-500 text-white"
                   onFocus={(e) => {
                     e.target.style.borderColor = accentColor;
-                    e.target.style.boxShadow = `0 0 20px ${accentColor}40`;
+                    e.target.parentElement!.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = `0 10px 30px -10px ${accentColor}40`;
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.target.parentElement!.style.transform = 'translateY(0)';
                     e.target.style.boxShadow = "none";
                   }}
                 />
-              ))}
-
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                placeholder="Your Message"
-                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg resize-none focus:outline-none transition-all duration-300"
-                onFocus={(e) => {
-                  e.target.style.borderColor = accentColor;
-                  e.target.style.boxShadow = `0 0 20px ${accentColor}40`;
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "rgba(255,255,255,0.1)";
-                  e.target.style.boxShadow = "none";
-                }}
-              />
+              </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 rounded-lg font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 ${
+                className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-300 transform hover:-translate-y-1 active:scale-95 shadow-lg ${
                   mode === "creative"
-                    ? "bg-[hsl(340,100%,50%)] text-white"
-                    : "bg-[hsl(187,100%,50%)] text-black"
+                    ? "bg-[hsl(340,100%,50%)] text-white hover:shadow-[hsl(340,100%,50%)]/30"
+                    : "bg-[hsl(187,100%,50%)] text-black hover:shadow-[hsl(187,100%,50%)]/30"
                 } ${isSubmitting && "opacity-70"}`}
               >
-                {isSubmitting
-                  ? "Transmitting..."
-                  : submitted
-                    ? "Message Sent!"
-                    : "Transmit"}
-                <Send className="w-4 h-4" />
+                <span className="text-sm">
+                  {isSubmitting
+                    ? "Transmitting Signal..."
+                    : submitted
+                      ? "Message Transmitted"
+                      : "Send Message"}
+                </span>
+                {!submitted && <Send className="w-4 h-4" />}
               </button>
             </form>
           </div>
 
-          {/* INFO */}
+          {/* INFO - KEPT EXACTLY SAME */}
           <div
             className={`space-y-8 transition-all duration-1000 delay-400 ${
               isVisible
